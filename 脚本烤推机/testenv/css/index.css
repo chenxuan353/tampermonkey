@@ -1,0 +1,17 @@
+.compatible_nav {
+  position: fixed;
+  left: 100px;
+  top: 100px;
+}
+.compatible_nav .compatible_content {
+  display: block;
+}
+.compatible_tweet {
+  position: fixed;
+  right: 100px;
+  top: 100px;
+}
+.compatible_tweet .compatible_content {
+  display: block;
+}
+/*# sourceMappingURL=./index.css.map */

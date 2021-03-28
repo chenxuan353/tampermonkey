@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Document</title>
+
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="./vender/bootstrap-4.6.0-dist/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.7/css/layui.css" /> -->
+    <!-- <link rel="stylesheet" href="./vender/layer/3.1.1/css/layer.min.css" /> -->
+    <script src="./vender/axios/0.18.0/axios.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js" crossorigin="anonymous"></script> -->
+    <script src="./vender/jquery/3.6.0/jquery.js"></script>
+    <!-- <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script> -->
+    <script src="./vender/vue/2.6.12/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
+    <script src="./vender/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.min.js"></script> -->
+    <script src="./vender/layer/3.1.1/layer.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/wangeditor@4.6.12/dist/wangEditor.min.js"></script> -->
+    <script src="./vender/wangeditor/4.6.12/wangEditor.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="./js/tewwtemoji.js"></script>
+    <script src="./js/compatible_tm_script.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div style="padding-top: 30px">
+            <hr />
+        </div>
+        <div class="compatible_nav">
+            <div class="compatible_content">
+                <nav role="navigation" class="r-1habvwh"></nav>
+            </div>
+        </div>
+        <div class="compatible_tweet">
+            <div class="compatible_content">
+                <!-- 推特主元素锚点 -->
+                <section aria-labelledby="" class="css-1dbjc4n card">
+                    <div class="card-header">
+                        推文的兼容锚点
+                    </div>
+                    <!-- 推文锚点 -->
+                    <article class="card-body">
+                        <div class="r-bnwqim">推文的文本内容锚点</div>
+                        <div class="r-tzz3ar">转推喜欢锚点</div>
+                        <div class="r-1r5su4o">时间锚点</div>
+                    </article>
+                </section>
+            </div>
+        </div>
+        <!-- <div class="sidebar_outbord">
+            <div class="sidebar_trigger">
+                <div class="sidebar">
+                    <div class="sidebar_type_content">
+                        <div class="sidebar_type">
+                            <span>脚本烤推</span>
+                        </div>
+                    </div>
+                    <div class="sidebar_container button-group-style">
+                        <CSSbutton :title="'测试'" @click="test"></CSSbutton>
+                        <CSSbutton :title="'测试'" @click="test"></CSSbutton>
+                        <CSSbutton :title="'测试'" @click="test"></CSSbutton>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div style="width: 700px; margin: 0 auto">
+            <div id="tweetTransEdit" style="padding: 20px">
+                <div class="alert alert-primary" role="alert">
+                    翻译配置区域
+                </div>
+                <div id="script_trans_config_out">
+                    <!--  -->
+                    <div id="script_trans_config" style="padding:20px">
+                        <div id="trans_config">
+                            <div class="alert alert-primary" role="alert">
+                                如果不进行保存，配置将在刷新后失效
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">模版</span>
+                                    </div>
+                                    <input type="text" class="form-control edit_template_edit"
+                                        aria-label="Text input with dropdown button" readonly :value="trans_tamplate">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                            data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">操作</button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item edit_template"
+                                                @click="editTemplateName">重命名</button>
+                                            <button class="dropdown-item create_template"
+                                                @click="createTemplate">新建模版</button>
+                                            <button class="dropdown-item delete_template"
+                                                @click="deleteTemplate">删除模版</button>
+                                        </div>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary dropdown-toggle edit_template_select"
+                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">选择模版</button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item" @click="selectTemplate(k)"
+                                                v-for="v,k in trans_tamplates">{{ k
+                                                }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="container-fluid">
+                                    <div class="row row-cols-3">
+                                        <div class="col" v-for="(v,k) in switch_config">
+                                            <div class="custom-control custom-switch custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input" v-model="v.value"
+                                                    :id="'config_' + k">
+                                                <label class="custom-control-label" :for="'config_' + k" data-toggle="tooltip"
+                                                    :title="v.des" data-placement="right">{{ v.title }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div id="wangeditor_config"></div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-primary" @click="configSave">保存</button>
+                                <button type="button" class="btn btn-primary" @click="configTempSave">临时保存</button>
+                                <button type="button" class="btn btn-primary" @click="configReset">重置</button>
+                                <button type="button" class="btn btn-secondary" @click="configCancel">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+
+                <div class="alert alert-primary" role="alert">
+                    翻译置入区域
+                </div>
+
+                <div id="script_trans_out">
+                    <!--  -->
+                    <div id="script_trans" style="padding:20px">
+                        <div class="trans">
+                            <div class="card">
+                                <div class="card-header">
+                                    原文及模版预览
+                                </div>
+                                <div class="card-body">
+                                    <div v-html="tweet_html"></div>
+                                    <hr>
+                                    <div class="insert_trans_type" v-html="trans_tamplate_str"></div>
+                                    <br>
+                                    <button class="btn btn-primary" @click="pasteToEdit">粘贴原文到编辑器</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <div>
+                                    <h3>翻译内容</h3>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">模版</span>
+                                        </div>
+                                        <input type="text" class="form-control edit_template_edit"
+                                            aria-label="Text input with dropdown button" readonly :value="trans_tamplate">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary dropdown-toggle edit_template_select"
+                                                type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">选择模版</button>
+                                            <div class="dropdown-menu">
+                                                <button class="dropdown-item" @click="selectTemplate(k)"
+                                                    v-for="v,k in trans_tamplates">{{ k
+                                                    }}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div id="wangeditor_trans"></div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary" @click="trans_submit">提交</button>
+                                    <button type="button" class="btn btn-primary" @click="trans_reset">重置</button>
+                                    <button type="button" class="btn btn-secondary" @click="trans_cancel">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- <script src="./js/index_vue.js"></script> -->
+    <script src="./js/script_test.js"></script>
+    <script src="./js/tweetData.js"></script>
+    <script src="./js/index_vue.js"></script>
+    <link rel="stylesheet" href="./css/script_css.css" />
+</body>
+
+</html>
