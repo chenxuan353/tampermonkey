@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         脚本烤推机
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/chenxuan353/tampermonkey/
 // @version      0.1
 // @description  通过JS脚本烤推注入的烤推机，未来可能集成至扩展中。拥有友好界面()
 // @author       chenxuan
